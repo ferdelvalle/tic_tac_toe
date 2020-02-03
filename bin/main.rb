@@ -19,6 +19,77 @@ end
 
 print_board(board)
 
+def vcheck(arr)
+  winner = 0
+  column =[]
+  vind1 = 0
+  vind2 = 3
+  vind3 = 6
+  while vind1 != 3
+    column << arr[vind1]
+    column << arr[vind2]
+    column << arr[vind3]
+
+    if column.all? { |x| x == "X"}
+      winner = 1
+    elsif column.all? { |o| o == "O" }
+      winner = 2
+    end
+    column =[]
+    vind1 += 1
+    vind2 += 1
+    vind3 += 1
+    puts "no vertical" if winner == 0
+  end
+end
+
+def hcheck(arr)
+  winner = 0
+  row =[]
+  hind1 = 0
+  hind2 = 1
+  hind3 = 2
+  while hind1 < 7
+    row << arr[hind1]
+    row << arr[hind2]
+    row << arr[hind3]
+
+    if row.all? { |x| x == "X"}
+      winner = 1
+    elsif row.all? { |o| o == "O" }
+      winner = 2
+    end
+      row =[]
+    hind1 += 3
+    hind2 += 3
+    hind3 += 3
+    puts "no horizontal " if winner == 0
+  end
+end
+
+def dcheck(arr)
+  winner = 0
+  diagonal =[]
+  dind1 = 0
+  dind2 = 4
+  dind3 = 8
+  while dind1 < 7
+    diagonal << arr[dind1]
+    diagonal << arr[dind2]
+    diagonal << arr[dind3]
+
+    if diagonal.all? { |x| x == "X"}
+      winner = 1
+    elsif diagonal.all? { |o| o == "O" }
+      winner = 2
+    end
+    diagonal =[]
+    dind1 += 6
+    dind3 -= 6
+    puts "no diagonal" if winner == 0
+  end
+end
+
 while GAME_FINISHED == false
   count += 1
   if count.odd?
@@ -39,4 +110,7 @@ while GAME_FINISHED == false
   print_board(board)
   # here logic should chech if someone has won
   GAME_FINISHED = true if count == 10
+  vcheck(board)
+  hcheck(board)
+  dcheck(board)
 end
