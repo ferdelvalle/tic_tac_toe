@@ -13,9 +13,9 @@ def vcheck(arr)
     column << arr[vind2]
     column << arr[vind3]
 
-    if column.all? { |x| x == 'X'}
+    if column.all? { |x| x == 'X'.blue}
       $winner = 1
-    elsif column.all? { |o| o == 'O' }
+    elsif column.all? { |o| o == 'O'.pink }
       $winner = 2
     end
     column =[]
@@ -37,9 +37,9 @@ def hcheck(arr)
     row << arr[hind2]
     row << arr[hind3]
 
-    if row.all? { |x| x == 'X'}
+    if row.all? { |x| x == 'X'.blue}
       $winner = 1
-    elsif row.all? { |o| o == 'O' }
+    elsif row.all? { |o| o == 'O'.pink }
       $winner = 2
     end
       row =[]
@@ -61,9 +61,9 @@ def dcheck(arr)
     diagonal << arr[dind2]
     diagonal << arr[dind3]
 
-    if diagonal.all? { |x| x == 'X'}
+    if diagonal.all? { |x| x == 'X'.blue}
       $winner = 1
-    elsif diagonal.all? { |o| o == 'O' }
+    elsif diagonal.all? { |o| o == 'O'.pink }
       $winner = 2
     end
     diagonal =[]
@@ -92,29 +92,72 @@ end
 def victory_check(param)
   if param == 1
     $count = 9
-    puts "Congratulations #{$player1} you've won"  
+    print "\n #{$player1}"
+    print " wins!".green
   elsif param == 2
     $count = 9
-    puts"Congratulations #{$player1} you've won"
+    print "\n #{$player2}"
+    print" wins!".green
   end
 end
 
 
 #this one goes in main
 
+#colors
+class String
+  # colorization
+  def colorize(color_code)
+    "\e[#{color_code}m#{self}\e[0m"
+  end
+
+  def red
+    colorize(31)
+  end
+
+  def green
+    colorize(32)
+  end
+
+  def yellow
+    colorize(33)
+  end
+
+  def blue
+    colorize(34)
+  end
+
+  def pink
+    colorize(35)
+  end
+
+end
+
 #Board pringing method
 def print_board(param)
-  puts "  #{param[0]}  | #{param[1]} | #{param[2]}  "
-  puts '--------------'
-  puts "  #{param[3]}  | #{param[4]} | #{param[5]}  "
-  puts '--------------'
-  puts "  #{param[6]}  | #{param[7]} | #{param[8]}  "
+  print "\n  #{param[0]}"
+  print " ¦ ".yellow
+  print "#{param[1]}"
+  print " ¦ ".yellow
+  print "#{param[2]} \n "
+  puts '-----------'.yellow
+  print "  #{param[3]}"
+  print " ¦ ".yellow
+  print "#{param[4]}"
+  print " ¦ ".yellow
+  print "#{param[5]} \n "
+  puts '-----------'.yellow
+  print "  #{param[6]}"
+  print " ¦ ".yellow
+  print "#{param[7]}"
+  print " ¦ ".yellow
+  print "#{param[8]}  \n "
 end
 
 #Input checking methods
 def error_entry(parameter)
   while valid_check(parameter) == false
-    puts "number 1-9 only"
+    puts "number 1-9 only".red
     parameter = gets.chomp!
   end
   $valid_input = parameter
@@ -122,7 +165,7 @@ end
 
 def repeat_entry (parameter)
   while repeat_check(parameter) == false
-    puts "that has already been done!"
+    puts "that has already been done!".red
     parameter = gets.chomp!
     error_entry(parameter)    
   end
@@ -131,7 +174,7 @@ end
 
 #playing method
 def playing (player, mark)
-  puts "what is #{player}'s move?"
+  puts "\n what is #{player}'s move?"
   entry = gets.chomp!
   error_entry(entry)
   repeat_entry($valid_input)
@@ -147,20 +190,20 @@ end
 $board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 $count = 0
 
-puts 'What is the name of the first player?'
-$player1 = gets.chomp!
+puts '\n What is the name of the first player?'.blue
+$player1 = gets.chomp!.blue
 
-puts 'What is the name of the second player?'
-$player2 = gets.chomp!
+puts '\n What is the name of the second player?'.pink
+$player2 = gets.chomp!.pink
 
 print_board($board)
 
 while $count != 9
   $count += 1
   if $count.odd?
-    playing($player1, 'X')
+    playing($player1, 'X'.blue)
   else
-    playing($player2, 'O')
+    playing($player2, 'O'.pink)
   end
   print_board($board)
   vcheck($board)
