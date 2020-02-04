@@ -1,5 +1,5 @@
 # Here is where the game logic goes
-
+=begin
 # module board
 
 board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -112,7 +112,47 @@ def dcheck(arr)
   end
 end
 #ends class checkers
+#starts input checkers
+=end
 
+#this one goes in logic
+def valid_input_check(param)
+  until param.match(/[1-9]/) && param.length < 2
+    return false
+  end
+end
 
+def repeat_check(param)
+  index = param.to_i
+  if $board[index].is_a? String
+    return false
+  end
+end
 
+#this one goes in main
+def error_entry(parameter)
+  while valid_input_check(parameter) == false
+    puts "number 1-9 only"
+    parameter = gets.chomp!
+  end
+  $input = parameter
+end
 
+def repeated_entry(input)
+  while repeat_check(input) == false
+  puts "that has already been done!"
+  input = gets.chomp!
+  error_entry(input)
+  input = $input.to_i
+  end
+  $input = input
+end
+
+#ends input checkers
+
+puts "number, mortal"
+entry =  gets.chomp!
+error_entry(entry)
+$board = [0, "pato", 5]
+
+repeated_entry(entry)
