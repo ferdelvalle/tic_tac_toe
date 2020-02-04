@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-
+require_relative '../lib/logic'
 #Class interface
 #Board pringing method
 def print_board(param)
