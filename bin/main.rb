@@ -189,11 +189,12 @@ end
 
 $board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 $count = 0
+puts "Welcome to Tic Tac Toe by Tenny and Fer"
 
-puts '\n What is the name of the first player?'.blue
+puts "\nWhat is the name of the first player?".blue
 $player1 = gets.chomp!.blue
 
-puts '\n What is the name of the second player?'.pink
+puts "\nWhat is the name of the second player?".pink
 $player2 = gets.chomp!.pink
 
 print_board($board)
