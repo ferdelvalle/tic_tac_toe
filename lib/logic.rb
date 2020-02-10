@@ -27,6 +27,21 @@ end
 
 # Logic
 
+# Counts turns
+class Counter
+  attr_accessor :count
+  attr_accessor :status
+  def initialize(count, status = false)
+    @count = count
+    @status = status
+  end
+
+  #Finishes the game
+  def self.finisher(number)
+    @number = true
+  end
+end
+
 # Creates a board object which is an array from 1 to 9
 class GameBoard
   attr_accessor :board

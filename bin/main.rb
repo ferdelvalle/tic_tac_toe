@@ -7,7 +7,7 @@ class Interface
   def self.display(param)
     @parameter = param
     print "\n  #{@parameter[0]}"
-    print " ¦ ".yellow
+    print ' ¦ '.yellow
     print "#{@parameter[1]}"
     print ' ¦ '.yellow
     print "#{@parameter[2]} \n "
@@ -37,17 +37,20 @@ class Interface
   end
 
   # Checks if there is a winner, if there is, it finishes the game and announces the winner.
-  def self.victory_check(winner, player1, player2)
+  def self.victory_check(winner, player1, player2, turn)
     @winner = winner
     @player1 = player1
     @player2 = player2
-    if @winner == 1 && $count < 9
+    @turn = turn
+    if @winner == 1 && @turn < 9
       print "\n#{player1} Wins!"
-      $count = 9
-    elsif @winner == 2 && $count < 9
+      #This doesn't work
+      turn.status = true
+    elsif @winner == 2 && @turn < 9
       print "\n#{player2} Wins!"
-      $count = 9
-    elsif $count == 9
+      #This doesn't work
+      turn.status = true
+    elsif @turn == 9
       print "\n DRAW".green
     end
   end
@@ -61,11 +64,11 @@ puts "\n What is the name of the first player?".blue
 player1 = Players.new(gets.chomp.blue, 'X'.blue)
 puts "\n What is the name of the second player?".pink
 player2 = Players.new(gets.chomp.pink, 'O'.pink)
-$count = 0
 Interface.display(game.board)
-while $count != 9
-  $count += 1
-  if $count.odd?
+turn = Counter.new(0)
+while turn.count != 9 || turn.finish == false
+  turn.count += 1
+  if turn.count.odd?
     # Player 1 move
     puts "\n What is #{player1.name}'s move?"
     MovesInput.making_move(game.board, Interface.collect_move(gets.chomp, game.board), player1.mark)
@@ -75,5 +78,5 @@ while $count != 9
     MovesInput.making_move(game.board, Interface.collect_move(gets.chomp, game.board), player2.mark)
   end
   Interface.display(game.board)
-  Interface.victory_check(WinChecks.global(game.board), player1.name, player2.name)
+  Interface.victory_check(WinChecks.global(game.board), player1.name, player2.name, turn.count)
 end
