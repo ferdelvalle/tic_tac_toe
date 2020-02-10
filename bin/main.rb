@@ -37,7 +37,6 @@ class Interface
   end
 
   # Checks if there is a winner, if there is, it finishes the game and announces the winner.
-<<<<<<< HEAD
   def self.victory_check(winner, player1, player2)
     @winner = winner
     @player1 = player1
@@ -48,7 +47,6 @@ class Interface
     elsif @winner == 2
       print "\n#{player2}"" Wins!".green
       $count = 9
-=======
   def self.victory_check(winner, player1, player2, turn)
     @winner = winner
     @player1 = player1
@@ -64,7 +62,6 @@ class Interface
       turn.status = true
     elsif @turn == 9
       print "\n DRAW".green
->>>>>>> abb80cc667ce4f6383fbc17c2f1cf2baae785a57
     end
   end
 end
@@ -73,7 +70,6 @@ end
 
 puts 'Wellcome to Tic Tac Toe by Tenny and Fer'.green
 game = GameBoard.new
-<<<<<<< HEAD
 puts "\nWhat is the name of the first player?".blue
 player1 = Players.new(gets.chomp.blue, 'X'.blue)
 puts "\nWhat is the name of the second player?".pink
@@ -83,7 +79,6 @@ Interface.display(game.board)
 while $count != 9
   $count += 1
   if $count.odd?
-=======
 puts "\n What is the name of the first player?".blue
 player1 = Players.new(gets.chomp.blue, 'X'.blue)
 puts "\n What is the name of the second player?".pink
@@ -93,23 +88,14 @@ turn = Counter.new(0)
 while turn.count != 9 || turn.finish == false
   turn.count += 1
   if turn.count.odd?
->>>>>>> abb80cc667ce4f6383fbc17c2f1cf2baae785a57
     # Player 1 move
     puts "\n What is #{player1.name}'s move?"
     MovesInput.making_move(game.board, Interface.collect_move(gets.chomp, game.board), player1.mark)
   else
     # player 2 move
-<<<<<<< HEAD
     puts "\n What is #{player2.name}'s move?'"
     MovesInput.making_move(game.board, Interface.collect_move(gets.chomp, game.board), player2.mark)
   end
   Interface.display(game.board)
   Interface.victory_check(WinChecks.global(game.board), player1.name, player2.name)
-=======
-    puts "\n What is #{player2.name}'s move?"
-    MovesInput.making_move(game.board, Interface.collect_move(gets.chomp, game.board), player2.mark)
-  end
-  Interface.display(game.board)
-  Interface.victory_check(WinChecks.global(game.board), player1.name, player2.name, turn.count)
->>>>>>> abb80cc667ce4f6383fbc17c2f1cf2baae785a57
 end
