@@ -27,11 +27,26 @@ end
 
 # Logic
 
+# Counts turns
+class Counter
+  attr_accessor :count
+  attr_accessor :status
+  def initialize(count, status = false)
+    @count = count
+    @status = status
+  end
+
+  #Finishes the game
+  def self.finisher(number)
+    @number = true
+  end
+end
+
 # Creates a board object which is an array from 1 to 9
 class GameBoard
   attr_accessor :board
   def initialize
-    @board = Array (1..9)
+    @board = Array(1..9)
   end
 end
 
@@ -47,11 +62,10 @@ end
 
 # Makes the moves
 class MovesInput
-
   # Implementes the chosen move
   def self.making_move(board, move, mark)
     @move = move
-    @move -=1
+    @move -= 1
     @mark = mark
     board[@move] = @mark
   end
@@ -59,41 +73,38 @@ class MovesInput
   # Checks if the move input is valid
   def self.valid_check(input)
     @input = input
-    until @input.match(/[1-9]/) && @input.length < 2
-      return false
-    end
+    return false until @input.match(/[1-9]/) && @input.length < 2
   end
 
   # Checks if the move has already been chosen
   def self.repeat_check(board, input)
     @index = input.to_i
-    @index -=1
+    @index -= 1
     return false if board[@index].is_a? String
   end
 end
 
 # Checks for winning conditions and provides an output accordingly
 class WinChecks
-
   def self.global(board)
     @board = board
     @revision = []
     @revision << WinChecks.vertical(@board)
     @revision << WinChecks.horizontal(@board)
     @revision << WinChecks.diagonal(@board)
-    if @revision.any? { |i| i == 1}
-      return 1
-      elsif @revision.any? { |i| i == 2}
-      return 2
+    if @revision.any? { |i| i == 1 }
+      1
+    elsif @revision.any? { |i| i == 2 }
+      2
     else
-      return 0
+      0
     end
   end
 
   def self.vertical(board)
     @board = board
     @winner = 0
-    @column =[]
+    @column = []
     @vind1 = 0
     @vind2 = 3
     @vind3 = 6
@@ -102,23 +113,23 @@ class WinChecks
       @column << @board[@vind2]
       @column << @board[@vind3]
 
-      if @column.all? { |x| x == "X".blue}
+      if @column.all? { |x| x == 'X'.blue }
         @winner = 1
-      elsif @column.all? { |o| o == "O".pink }
+      elsif @column.all? { |o| o == 'O'.pink }
         @winner = 2
       end
-      @column =[]
+      @column = []
       @vind1 += 1
       @vind2 += 1
       @vind3 += 1
     end
-    return @winner
+    @winner
   end
 
   def self.horizontal(board)
     @board = board
     @winner = 0
-    @row =[]
+    @row = []
     @hind1 = 0
     @hind2 = 1
     @hind3 = 2
@@ -127,23 +138,23 @@ class WinChecks
       @row << @board[@hind2]
       @row << @board[@hind3]
 
-      if @row.all? { |x| x == "X".blue}
+      if @row.all? { |x| x == 'X'.blue }
         @winner = 1
-      elsif @row.all? { |o| o == "O".pink }
+      elsif @row.all? { |o| o == 'O'.pink }
         @winner = 2
       end
-        row =[]
+      row = []
       @hind1 += 3
       @hind2 += 3
       @hind3 += 3
     end
-    return @winner
+    @winner
   end
 
   def self.diagonal(board)
     @board = board
     @winner = 0
-    @diagonal =[]
+    @diagonal = []
     @dind1 = 0
     @dind2 = 4
     @dind3 = 8
@@ -152,16 +163,15 @@ class WinChecks
       @diagonal << @board[@dind2]
       @diagonal << @board[@dind3]
 
-      if @diagonal.all? { |x| x == "X".blue}
+      if @diagonal.all? { |x| x == 'X'.blue }
         @winner = 1
-      elsif @diagonal.all? { |o| o == "O".pink }
+      elsif @diagonal.all? { |o| o == 'O'.pink }
         @winner = 2
       end
-      @diagonal =[]
+      @diagonal = []
       @dind1 += 6
       @dind3 -= 6
     end
-    return @winner
+    @winner
   end
-
 end
