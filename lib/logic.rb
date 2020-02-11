@@ -31,14 +31,26 @@ end
 class Counter
   attr_accessor :count
   attr_accessor :status
-  def initialize(count, status = false)
-    @count = count
-    @status = status
+  @@count = 0
+
+  # Finishes the game after turn 9
+  def self.game_ending
+    return true if @@count != 9
   end
 
-  #Finishes the game
-  def self.finisher(number)
-    @number = true
+  # Finishes the game after victoru
+  def self.finisher
+    @@count = 9
+  end
+
+  # Increaser
+  def self.increaser
+    @@count += 1
+  end
+
+  # Assigned turns
+  def self.turn_odd
+    return true if @@count.odd?
   end
 end
 
@@ -112,12 +124,8 @@ class WinChecks
       @column << @board[@vind1]
       @column << @board[@vind2]
       @column << @board[@vind3]
-
-      if @column.all? { |x| x == 'X'.blue }
-        @winner = 1
-      elsif @column.all? { |o| o == 'O'.pink }
-        @winner = 2
-      end
+      @winner = 1 if @column.all? { |x| x == 'X'.blue }
+      @winner = 2 if @column.all? { |o| o == 'O'.pink }
       @column = []
       @vind1 += 1
       @vind2 += 1
@@ -137,13 +145,9 @@ class WinChecks
       @row << @board[@hind1]
       @row << @board[@hind2]
       @row << @board[@hind3]
-
-      if @row.all? { |x| x == 'X'.blue }
-        @winner = 1
-      elsif @row.all? { |o| o == 'O'.pink }
-        @winner = 2
-      end
-      row = []
+      @winner = 1 if @row.all? { |x| x == 'X'.blue }
+      @winner = 2 if @row.all? { |o| o == 'O'.pink }
+      @row = []
       @hind1 += 3
       @hind2 += 3
       @hind3 += 3
@@ -162,12 +166,8 @@ class WinChecks
       @diagonal << @board[@dind1]
       @diagonal << @board[@dind2]
       @diagonal << @board[@dind3]
-
-      if @diagonal.all? { |x| x == 'X'.blue }
-        @winner = 1
-      elsif @diagonal.all? { |o| o == 'O'.pink }
-        @winner = 2
-      end
+      @winner = 1 if @diagonal.all? { |x| x == 'X'.blue }
+      @winner = 2 if @diagonal.all? { |o| o == 'O'.pink }
       @diagonal = []
       @dind1 += 6
       @dind3 -= 6

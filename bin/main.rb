@@ -2,26 +2,26 @@
 require_relative '../lib/logic'
 
 # Responsible for collecting information and displaying it
-class Interface
+class Interface < Counter
   # Prints the board
   def self.display(param)
     @parameter = param
     print "\n  #{@parameter[0]}"
     print ' ¦ '.yellow
-    print "#{@parameter[1]}"
-    print ' ¦ '.yellow
+    print "#{@parameter[1]} "
+    print '¦ '.yellow
     print "#{@parameter[2]} \n "
     puts '-----------'.yellow
     print "  #{@parameter[3]}"
     print ' ¦ '.yellow
-    print "#{@parameter[4]}"
-    print ' ¦ '.yellow
+    print "#{@parameter[4]} "
+    print '¦ '.yellow
     print "#{@parameter[5]} \n "
     puts '-----------'.yellow
     print "  #{@parameter[6]}"
     print ' ¦ '.yellow
-    print "#{@parameter[7]}"
-    print ' ¦ '.yellow
+    print "#{@parameter[7]} "
+    print '¦ '.yellow
     print "#{@parameter[8]}  \n "
   end
 
@@ -41,25 +41,13 @@ class Interface
     @winner = winner
     @player1 = player1
     @player2 = player2
-    if @winner == 1
-      print "\n#{player1}"' Wins!'.green
-      $count = 9
-    elsif @winner == 2
-      print "\n#{player2}"" Wins!".green
-      $count = 9
-  def self.victory_check(winner, player1, player2, turn)
-    @winner = winner
-    @player1 = player1
-    @player2 = player2
-    @turn = turn
+    @turn = @@count
     if @winner == 1 && @turn < 9
       print "\n#{player1} Wins!"
-      #This doesn't work
-      turn.status = true
+      Interface.finisher
     elsif @winner == 2 && @turn < 9
       print "\n#{player2} Wins!"
-      #This doesn't work
-      turn.status = true
+      Interface.finisher
     elsif @turn == 9
       print "\n DRAW".green
     end
@@ -70,30 +58,21 @@ end
 
 puts 'Wellcome to Tic Tac Toe by Tenny and Fer'.green
 game = GameBoard.new
-puts "\nWhat is the name of the first player?".blue
-player1 = Players.new(gets.chomp.blue, 'X'.blue)
-puts "\nWhat is the name of the second player?".pink
-player2 = Players.new(gets.chomp.pink, 'O'.pink)
-$count = 0
-Interface.display(game.board)
-while $count != 9
-  $count += 1
-  if $count.odd?
 puts "\n What is the name of the first player?".blue
 player1 = Players.new(gets.chomp.blue, 'X'.blue)
 puts "\n What is the name of the second player?".pink
 player2 = Players.new(gets.chomp.pink, 'O'.pink)
 Interface.display(game.board)
-turn = Counter.new(0)
-while turn.count != 9 || turn.finish == false
-  turn.count += 1
-  if turn.count.odd?
+
+while Interface.game_ending
+  Interface.increaser
+  if Interface.turn_odd
     # Player 1 move
     puts "\n What is #{player1.name}'s move?"
     MovesInput.making_move(game.board, Interface.collect_move(gets.chomp, game.board), player1.mark)
   else
     # player 2 move
-    puts "\n What is #{player2.name}'s move?'"
+    puts "\n What is #{player2.name}'s move?"
     MovesInput.making_move(game.board, Interface.collect_move(gets.chomp, game.board), player2.mark)
   end
   Interface.display(game.board)
