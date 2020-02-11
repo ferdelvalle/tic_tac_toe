@@ -2,7 +2,7 @@
 require_relative '../lib/logic'
 
 # Responsible for collecting information and displaying it
-class Interface < Counter
+class Interface
   # Prints the board
   def self.display(param)
     @parameter = param
@@ -36,12 +36,36 @@ class Interface < Counter
     @move.to_i
   end
 
+  # Keeps the turn count
+  attr_accessor :count
+  @count = 0
+
+  # Finishes the game after turn 9
+  def self.game_ending
+    return true if @count != 9
+  end
+
+  # Finishes the game after victoru
+  def self.finisher
+    @count = 9
+  end
+
+  # Increaser
+  def self.increaser
+    @count += 1
+  end
+
+  # Assigned turns
+  def self.turn_odd
+    return true if @count.odd?
+  end
+
   # Checks if there is a winner, if there is, it finishes the game and announces the winner.
   def self.victory_check(winner, player1, player2)
     @winner = winner
     @player1 = player1
     @player2 = player2
-    @turn = @@count
+    @turn = @count
     if @winner == 1 && @turn < 9
       print "\n#{player1} Wins!"
       Interface.finisher

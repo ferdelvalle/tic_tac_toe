@@ -27,33 +27,6 @@ end
 
 # Logic
 
-# Counts turns
-class Counter
-  attr_accessor :count
-  attr_accessor :status
-  @@count = 0
-
-  # Finishes the game after turn 9
-  def self.game_ending
-    return true if @@count != 9
-  end
-
-  # Finishes the game after victoru
-  def self.finisher
-    @@count = 9
-  end
-
-  # Increaser
-  def self.increaser
-    @@count += 1
-  end
-
-  # Assigned turns
-  def self.turn_odd
-    return true if @@count.odd?
-  end
-end
-
 # Creates a board object which is an array from 1 to 9
 class GameBoard
   attr_accessor :board
