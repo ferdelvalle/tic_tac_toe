@@ -1,42 +1,104 @@
 #!/usr/bin/env ruby
-board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-count = 0
-GAME_FINISHED = false
+require_relative '../lib/logic'
 
-puts 'What is the name of the first player?'
-player1 = gets.chomp!
+# Responsible for collecting information and displaying it
+class Interface
+  # Prints the board
+  def self.display(param)
+    @parameter = param
+    print "\n  #{@parameter[0]}"
+    print ' ¦ '.yellow
+    print "#{@parameter[1]} "
+    print '¦ '.yellow
+    print "#{@parameter[2]} \n "
+    puts '-----------'.yellow
+    print "  #{@parameter[3]}"
+    print ' ¦ '.yellow
+    print "#{@parameter[4]} "
+    print '¦ '.yellow
+    print "#{@parameter[5]} \n "
+    puts '-----------'.yellow
+    print "  #{@parameter[6]}"
+    print ' ¦ '.yellow
+    print "#{@parameter[7]} "
+    print '¦ '.yellow
+    print "#{@parameter[8]}  \n "
+  end
 
-puts 'What is the name of the second player?'
-player2 = gets.chomp!
+  # Asks for a player's move, check if it's valid and if it is, returns it as integer
+  def self.collect_move(move, board)
+    @move = move
+    @board = board
+    while MovesInput.valid_check(@move) == false || MovesInput.repeat_check(@board, @move) == false
+      puts 'Invalid input or space already taken'.red
+      @move = gets.chomp!
+    end
+    @move.to_i
+  end
 
-def print_board(param)
-  puts "  #{param[0]}  | #{param[1]} | #{param[2]}  "
-  puts '--------------'
-  puts "  #{param[3]}  | #{param[4]} | #{param[5]}  "
-  puts '--------------'
-  puts "  #{param[6]}  | #{param[7]} | #{param[8]}  "
+  # Keeps the turn count
+  attr_accessor :count
+  @count = 0
+
+  # Finishes the game after turn 9
+  def self.game_ending
+    return true if @count != 9
+  end
+
+  # Finishes the game after victoru
+  def self.finisher
+    @count = 9
+  end
+
+  # Increaser
+  def self.increaser
+    @count += 1
+  end
+
+  # Assigned turns
+  def self.turn_odd
+    return true if @count.odd?
+  end
+
+  # Checks if there is a winner, if there is, it finishes the game and announces the winner.
+  def self.victory_check(winner, player1, player2)
+    @winner = winner
+    @player1 = player1
+    @player2 = player2
+    @turn = @count
+    if @winner == 1 && @turn < 9
+      print "\n#{player1} Wins!"
+      Interface.finisher
+    elsif @winner == 2 && @turn < 9
+      print "\n#{player2} Wins!"
+      Interface.finisher
+    elsif @turn == 9
+      print "\n DRAW".green
+    end
+  end
 end
 
-print_board(board)
+# Game
 
-while GAME_FINISHED == false
-  count += 1
-  if count.odd?
-    puts "what is #{player1}'s move?"
-    # logic has to check if the position has already been chosen by a player and if so, ask for another move
-    # Logic should also make sure the input is an integer between 1 to 9, if not, ask for a valid input
-    input = gets.chomp!.to_i
-    input -= 1
-    board[input] = 'X'
+puts 'Wellcome to Tic Tac Toe by Tenny and Fer'.green
+game = GameBoard.new
+puts "\n What is the name of the first player?".blue
+player1 = Players.new(gets.chomp.blue, 'X'.blue)
+puts "\n What is the name of the second player?".pink
+player2 = Players.new(gets.chomp.pink, 'O'.pink)
+Interface.display(game.board)
+
+while Interface.game_ending
+  Interface.increaser
+  if Interface.turn_odd
+    # Player 1 move
+    puts "\n What is #{player1.name}'s move?"
+    MovesInput.making_move(game.board, Interface.collect_move(gets.chomp, game.board), player1.mark)
   else
-    puts "what is #{player2}'s move?"
-    # logic has to check if the position has already been chosen by a player and if so, ask for another move
-    # Logic should also make sure the input is an integer between 1 to 9, if not, ask for a valid input
-    input = gets.chomp!.to_i
-    input -= 1
-    board[input] = 'O'
+    # player 2 move
+    puts "\n What is #{player2.name}'s move?"
+    MovesInput.making_move(game.board, Interface.collect_move(gets.chomp, game.board), player2.mark)
   end
-  print_board(board)
-  # here logic should chech if someone has won
-  GAME_FINISHED = true if count == 10
+  Interface.display(game.board)
+  Interface.victory_check(WinChecks.global(game.board), player1.name, player2.name)
 end
