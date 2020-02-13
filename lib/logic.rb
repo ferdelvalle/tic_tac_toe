@@ -37,8 +37,8 @@ end
 
 # Creates an object for each new player with name and mark (X or O)
 class Players
-  attr_reader :name
-  attr_reader :mark
+  attr_reader :name, :mark
+
   def initialize(name, mark)
     @name = name
     @mark = mark
