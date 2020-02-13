@@ -28,6 +28,7 @@ end
 # Logic
 
 # Creates a board object which is an array from 1 to 9
+# output.legth == 9
 class GameBoard
   attr_accessor :board
   def initialize

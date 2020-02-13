@@ -36,7 +36,7 @@ class Interface
     @move.to_i
   end
 
-  # Keeps the turn count
+ # Keeps the turn count
   attr_accessor :count
   @count = 0
 
@@ -58,7 +58,7 @@ class Interface
   # Assigned turns
   def self.turn_odd
     return true if @count.odd?
-  end
+  end 
 
   # Checks if there is a winner, if there is, it finishes the game and announces the winner.
   def self.victory_check(winner, player1, player2)
