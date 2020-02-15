@@ -27,7 +27,7 @@ class Interface
   end
 
   # Asks for a player's move, check if it's valid and if it is, returns it as integer
-  #this should return either a string "error" or an integer
+  # this should return either a string "error" or an integer
   def self.collect_move(move, board)
     @move = move
     @board = board
@@ -38,13 +38,13 @@ class Interface
     @move.to_i
   end
 
- # Keeps the turn count
- #return an integer
+  # Keeps the turn count
+  # return an integer
   attr_accessor :count
   @count = 0
 
   # Finishes the game after turn 9
-  #returns either false if @count < 9 or true if @count = 9
+  # returns either false if @count < 9 or true if @count = 9
   def self.game_ending
     return true if @count != 9
   end
@@ -65,12 +65,12 @@ class Interface
   # returns false if @count % 2 == 0 and true if @count %1 == 1
   def self.turn_odd
     return true if @count.odd?
-  end 
-
+  end
   # Checks if there is a winner, if there is, it finishes the game and announces the winner.
   # if winner == 1 returns a string and invokes finisher
   # if winner == 2 returns a string and invokes finisher
   # if winner == 0 && @turn == 9, returns a string
+
   def self.victory_check(winner, player1, player2)
     @winner = winner
     @player1 = player1
