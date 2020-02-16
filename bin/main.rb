@@ -49,7 +49,7 @@ class Interface
     return true if @count != 9
   end
 
-  # Finishes the game after victoru
+  # Finishes the game after victory
   # makes @count == 9
   def self.finisher
     @count = 9

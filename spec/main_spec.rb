@@ -1,4 +1,5 @@
 require_relative '../lib/logic'
+# Main
 
 # Logic
 
@@ -60,7 +61,7 @@ end
 # Class Players
 RSpec.describe Players do
   describe '#initialize' do
-    let(:player) {Players.new('me', 'X')}
+    let(:player) { Players.new('me', 'X') }
     it 'gets player name and assign to instance variable name' do
       expect(player.name).to eql('me')
     end
@@ -74,10 +75,9 @@ end
 # Class MovesInput
 RSpec.describe MovesInput do
   describe '#making_move' do
-
-    let(:board) {[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-    let(:move) {7}
-    let(:mark) {'X'}
+    let(:board) { [1, 2, 3, 4, 5, 6, 7, 8, 9] }
+    let(:move) { 7 }
+    let(:mark) { 'X' }
     it 'Implements the chosen move' do
       MovesInput.making_move(board, move, mark)
       expect(board).to eql([1, 2, 3, 4, 5, 6, 'X', 8, 9])
@@ -85,9 +85,9 @@ RSpec.describe MovesInput do
   end
 
   describe '#valid_check' do
-    let(:valid) {'1'}
-    let(:invalid1) {'G'}
-    let(:invalid2) {'11'}
+    let(:valid) { '1' }
+    let(:invalid1) { 'G' }
+    let(:invalid2) { '11' }
     it 'returns nil if the move input is an integer between 1 and 9' do
       boolie = MovesInput.valid_check(valid)
       expect(boolie).to eql(nil)
@@ -105,9 +105,9 @@ RSpec.describe MovesInput do
   end
 
   describe '#repeat_check' do
-    let(:game) {[1, 2, 3, 4, 5, 6, 'X', 8, 9]}
-    let(:validi) {'4'}
-    let(:invalidi) {'7'}
+    let(:game) { [1, 2, 3, 4, 5, 6, 'X', 8, 9] }
+    let(:validi) { '4' }
+    let(:invalidi) { '7' }
     it 'returns false if a position in the board is a string (already taken)' do
       boolie = MovesInput.repeat_check(game, invalidi)
       expect(boolie).to eql(false)
@@ -122,10 +122,9 @@ end
 
 # Class WinChecks
 
-
 RSpec.describe WinChecks do
-  let(:markx) {'X'.blue}
-  let(:marko) {'O'.pink}
+  let(:markx) { 'X'.blue }
+  let(:marko) { 'O'.pink }
   describe '#global' do
     it 'returns 0 if positions 1, 4 and 7 are not equaly marked' do
       game = [1, 2, 3, 4, 5, 6, 7, 8, 9]
