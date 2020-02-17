@@ -14,29 +14,6 @@ RSpec.describe Interface do
     end
   end
 
-  describe '#collect_move' do
-    let(:game) { [1, 'O', 3, 4, 'X', 6, 7, 8, 9] }
-    let(:badmsg) { 'Invalid input or space already taken'.red }
-    it 'gets an invalid move (character) and displays an error' do  
-      expect { Interface.collect_move('G', game) }.to output(badmsg).to_stdout 
-    end
-
-    it 'gets an invalid move (integer > 9) and displays an error' do 
-      expect { Interface.collect_move('123', game) }.to output(badmsg).to_stdout 
-    end
-
-    it 'gets an invalid move (repeated) and displays an error' do 
-      expect { Interface.collect_move('2', game) }.to output(badmsg).to_stdout 
-    end
-
-    it 'gets an valid move and returns that move as integer' do 
-      result = Interface.collect_move('7', game)
-      expect(result).to eql(7)
-    end
-  end
-end
-
-=begin
   # Tenny
 
   describe '#game_ending' do
@@ -93,7 +70,7 @@ end
     end
   end
 end
-=end
+
 # Logic
 
 # Class String

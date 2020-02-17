@@ -1,6 +1,18 @@
 #!/usr/bin/env ruby
 require_relative '../lib/logic'
 
+class Interface
+  def self.collect_move(move, board)
+    @move = move
+    @board = board
+    while MovesInput.valid_check(@move) == false || MovesInput.repeat_check(@board, @move) == false
+      puts 'Invalid input or space already taken'.red
+      @move = gets.chomp!
+    end
+    @move.to_i
+  end
+end
+
 # Game
 
 puts 'Wellcome to Tic Tac Toe by Tenny and Fer'.green

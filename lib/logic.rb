@@ -40,20 +40,10 @@ class Interface
 
   # Asks for a player's move, check if it's valid and if it is, returns it as integer
   # this should return either a string "error" or an integer
-  def self.collect_move(move, board)
-    @move = move
-    @board = board
-    while MovesInput.valid_check(@move) == false || MovesInput.repeat_check(@board, @move) == false
-      puts 'Invalid input or space already taken'.red
-      @move = gets.chomp!
-    end
-    @move.to_i
-  end
 
   # Keeps the turn count
   # NOT A METHOD, its a variable declaration
   attr_accessor :count
-  @count = 0
 
   # Finishes the game after turn 9
   # returns either false if @count < 9 or true if @count = 9
