@@ -1,6 +1,92 @@
 require_relative '../lib/logic'
 # Main
 
+# Class Interface
+
+RSpec.describe Interface do
+  describe '#display' do
+    it 'displays the game board' do
+      expect().to eql()
+    end
+  end
+
+  describe '#collect_move' do
+    it 'gets an invalid move (character) and displays an error' do
+      expect().to eql()
+    end
+
+    it 'gets an invalid move (integer > 9) and displays an error' do
+      expect().to eql()
+    end
+
+    it 'gets an invalid move (repeated) and displays an error' do
+      expect().to eql()
+    end
+
+    it 'gets an valid move and returns that move as integer' do
+      expect().to eql()
+    end
+
+    it 'gets an valid move and returns that move as integer with a length < 2' do
+      expect().to eql()
+    end
+  end
+
+  describe '#game_ending' do
+    it 'returns true if @count != 9' do
+      expect().to eql()
+    end
+
+    it 'returns nil if @count == 9' do
+      expect().to eql()
+    end
+  end
+
+  describe '#finisher' do
+    it 'sets @count to 9' do
+      expect().to eql()
+    end
+  end
+
+  describe '#increaser' do
+    it 'increases @count by one' do
+      expect().to eql()
+    end
+  end
+
+  describe '#turn_odd' do
+    it 'returns true if @count is an odd number' do
+      expect().to eql()
+    end
+
+    it 'returns nil if @count is an even number' do
+      expect().to eql()
+    end
+  end
+
+  describe '#victory_check' do
+    it 'prints player 1 won if @winner == 1 && @count < 9' do
+      expect().to eql()
+    end
+
+    it 'invokes Interface.finisher if @winner == 1 && @count < 9' do
+      expect().to eql()
+    end
+
+    it 'prints "player 2 won" if @winner == 2 && @count < 9' do
+      expect().to eql()
+    end
+
+    it 'invokes Interface.finisher if @winner == 2 && @count < 9' do
+      expect().to eql()
+    end
+
+    it 'prints DRAW if @count == 9' do
+      expect().to eql()
+    end
+  end
+end
+
 # Logic
 
 # Class String

@@ -38,8 +38,7 @@ class Interface
     @move.to_i
   end
 
-  # Keeps the turn count
-  # return an integer
+  # Not a Method
   attr_accessor :count
   @count = 0
 
