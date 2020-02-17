@@ -13,7 +13,9 @@ RSpec.describe Interface do
       expect(outie).to be_a(String)
     end
   end
+end
 
+=begin
   # Tenny
 
   describe '#game_ending' do
@@ -70,6 +72,7 @@ RSpec.describe Interface do
     end
   end
 end
+=end
 
 # Logic
 

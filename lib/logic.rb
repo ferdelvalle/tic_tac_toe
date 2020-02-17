@@ -35,7 +35,7 @@ class Interface
     @centerdiv = ' ¦ '.yellow
     @leftdiv = '¦ '.yellow
     @rowdiv = "\n -----------".yellow    
-    return "\n  #{@parameter[0]}#{@centerdiv}#{@parameter[1]} #{@leftdiv}#{@parameter[2]}  #{@rowdiv}\n  #{@parameter[3]}#{@centerdiv}#{@parameter[4]} #{@leftdiv}#{@parameter[5]}  #{@rowdiv}\n  #{@parameter[6]}#{@centerdiv}#{@parameter[7]} #{@leftdiv}#{@parameter[8]}  \n "
+    "\n  #{@parameter[0]}#{@centerdiv}#{@parameter[1]} #{@leftdiv}#{@parameter[2]}  #{@rowdiv}\n  #{@parameter[3]}#{@centerdiv}#{@parameter[4]} #{@leftdiv}#{@parameter[5]}  #{@rowdiv}\n  #{@parameter[6]}#{@centerdiv}#{@parameter[7]} #{@leftdiv}#{@parameter[8]}  \n "
   end
 
   # Keeps the turn count
@@ -43,6 +43,28 @@ class Interface
   attr_accessor :count
   @count = 0
 
+  # Checks if there is a winner, if there is, it finishes the game and announces the winner.
+  # if winner == 1 returns a string and invokes finisher
+  # if winner == 2 returns a string and invokes finisher
+  # if winner == 0 && @turn == 9, returns a string
+
+  def self.victory_check(winner, player1, player2)
+    @winner = winner
+    @player1 = player1
+    @player2 = player2
+    @turn = @count
+    if @winner == 1 && @turn < 9
+      Interface.finisher
+      "\n#{player1} Wins!"
+    elsif @winner == 2 && @turn < 9
+      Interface.finisher
+      "\n#{player2} Wins!"
+    elsif @turn == 9
+      "\n DRAW".green
+    end
+  end
+
+  private
   # Finishes the game after turn 9
   # returns either false if @count < 9 or true if @count = 9
   def self.game_ending
@@ -65,26 +87,6 @@ class Interface
   # returns false if @count % 2 == 0 and true if @count %1 == 1
   def self.turn_odd
     return true if @count.odd?
-  end
-  # Checks if there is a winner, if there is, it finishes the game and announces the winner.
-  # if winner == 1 returns a string and invokes finisher
-  # if winner == 2 returns a string and invokes finisher
-  # if winner == 0 && @turn == 9, returns a string
-
-  def self.victory_check(winner, player1, player2)
-    @winner = winner
-    @player1 = player1
-    @player2 = player2
-    @turn = @count
-    if @winner == 1 && @turn < 9
-      Interface.finisher
-      return "\n#{player1} Wins!"      
-    elsif @winner == 2 && @turn < 9
-      Interface.finisher
-      return "\n#{player2} Wins!"      
-    elsif @turn == 9
-      return "\n DRAW".green
-    end
   end
 end
 
