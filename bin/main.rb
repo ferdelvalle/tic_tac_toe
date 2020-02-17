@@ -2,6 +2,7 @@
 require_relative '../lib/logic'
 
 class Interface
+  private
   def self.collect_move(move, board)
     @move = move
     @board = board

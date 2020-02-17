@@ -38,12 +38,10 @@ class Interface
     return "\n  #{@parameter[0]}#{@centerdiv}#{@parameter[1]} #{@leftdiv}#{@parameter[2]}  #{@rowdiv}\n  #{@parameter[3]}#{@centerdiv}#{@parameter[4]} #{@leftdiv}#{@parameter[5]}  #{@rowdiv}\n  #{@parameter[6]}#{@centerdiv}#{@parameter[7]} #{@leftdiv}#{@parameter[8]}  \n "
   end
 
-  # Asks for a player's move, check if it's valid and if it is, returns it as integer
-  # this should return either a string "error" or an integer
-
   # Keeps the turn count
   # NOT A METHOD, its a variable declaration
   attr_accessor :count
+  @count = 0
 
   # Finishes the game after turn 9
   # returns either false if @count < 9 or true if @count = 9
