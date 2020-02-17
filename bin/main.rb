@@ -38,7 +38,8 @@ class Interface
     @move.to_i
   end
 
-  # Not a Method
+  # Keeps the turn count
+  # NOT A METHOD, its a variable declaration
   attr_accessor :count
   @count = 0
 

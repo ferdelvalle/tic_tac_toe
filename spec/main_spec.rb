@@ -3,6 +3,8 @@ require_relative '../lib/logic'
 
 # Class Interface
 
+# Fer =(
+
 RSpec.describe Interface do
   describe '#display' do
     it 'displays the game board' do
@@ -31,6 +33,8 @@ RSpec.describe Interface do
       expect().to eql()
     end
   end
+
+  # Tenny
 
   describe '#game_ending' do
     it 'returns true if @count != 9' do
