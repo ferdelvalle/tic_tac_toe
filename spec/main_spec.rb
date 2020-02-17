@@ -3,37 +3,40 @@ require_relative '../lib/logic'
 
 # Class Interface
 
-# Fer =(
+# Fer
 
 RSpec.describe Interface do
-  describe '#display' do
-    it 'displays the game board' do
-      expect().to eql()
+  describe 'display' do
+    it 'displays the board' do
+      game = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+      outie = Interface.display(game)
+      expect(outie).to be_a(String)
     end
   end
 
   describe '#collect_move' do
-    it 'gets an invalid move (character) and displays an error' do
-      expect().to eql()
+    let(:game) { [1, 'O', 3, 4, 'X', 6, 7, 8, 9] }
+    let(:badmsg) { 'Invalid input or space already taken'.red }
+    it 'gets an invalid move (character) and displays an error' do  
+      expect { Interface.collect_move('G', game) }.to output(badmsg).to_stdout 
     end
 
-    it 'gets an invalid move (integer > 9) and displays an error' do
-      expect().to eql()
+    it 'gets an invalid move (integer > 9) and displays an error' do 
+      expect { Interface.collect_move('123', game) }.to output(badmsg).to_stdout 
     end
 
-    it 'gets an invalid move (repeated) and displays an error' do
-      expect().to eql()
+    it 'gets an invalid move (repeated) and displays an error' do 
+      expect { Interface.collect_move('2', game) }.to output(badmsg).to_stdout 
     end
 
-    it 'gets an valid move and returns that move as integer' do
-      expect().to eql()
-    end
-
-    it 'gets an valid move and returns that move as integer with a length < 2' do
-      expect().to eql()
+    it 'gets an valid move and returns that move as integer' do 
+      result = Interface.collect_move('7', game)
+      expect(result).to eql(7)
     end
   end
+end
 
+=begin
   # Tenny
 
   describe '#game_ending' do
@@ -90,7 +93,7 @@ RSpec.describe Interface do
     end
   end
 end
-
+=end
 # Logic
 
 # Class String

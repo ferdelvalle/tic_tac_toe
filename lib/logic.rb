@@ -27,6 +27,79 @@ end
 
 # Logic
 
+# Responsible for collecting information and displaying it
+class Interface
+  # returns the board
+  def self.display(param)
+    @parameter = param
+    @centerdiv = ' ¦ '.yellow
+    @leftdiv = '¦ '.yellow
+    @rowdiv = "\n -----------".yellow    
+    return "\n  #{@parameter[0]}#{@centerdiv}#{@parameter[1]} #{@leftdiv}#{@parameter[2]}  #{@rowdiv}\n  #{@parameter[3]}#{@centerdiv}#{@parameter[4]} #{@leftdiv}#{@parameter[5]}  #{@rowdiv}\n  #{@parameter[6]}#{@centerdiv}#{@parameter[7]} #{@leftdiv}#{@parameter[8]}  \n "
+  end
+
+  # Asks for a player's move, check if it's valid and if it is, returns it as integer
+  # this should return either a string "error" or an integer
+  def self.collect_move(move, board)
+    @move = move
+    @board = board
+    while MovesInput.valid_check(@move) == false || MovesInput.repeat_check(@board, @move) == false
+      puts 'Invalid input or space already taken'.red
+      @move = gets.chomp!
+    end
+    @move.to_i
+  end
+
+  # Keeps the turn count
+  # NOT A METHOD, its a variable declaration
+  attr_accessor :count
+  @count = 0
+
+  # Finishes the game after turn 9
+  # returns either false if @count < 9 or true if @count = 9
+  def self.game_ending
+    return true if @count != 9
+  end
+
+  # Finishes the game after victory
+  # makes @count == 9
+  def self.finisher
+    @count = 9
+  end
+
+  # Increaser
+  # returns input +1
+  def self.increaser
+    @count += 1
+  end
+
+  # Assigned turns
+  # returns false if @count % 2 == 0 and true if @count %1 == 1
+  def self.turn_odd
+    return true if @count.odd?
+  end
+  # Checks if there is a winner, if there is, it finishes the game and announces the winner.
+  # if winner == 1 returns a string and invokes finisher
+  # if winner == 2 returns a string and invokes finisher
+  # if winner == 0 && @turn == 9, returns a string
+
+  def self.victory_check(winner, player1, player2)
+    @winner = winner
+    @player1 = player1
+    @player2 = player2
+    @turn = @count
+    if @winner == 1 && @turn < 9
+      Interface.finisher
+      return "\n#{player1} Wins!"      
+    elsif @winner == 2 && @turn < 9
+      Interface.finisher
+      return "\n#{player2} Wins!"      
+    elsif @turn == 9
+      return "\n DRAW".green
+    end
+  end
+end
+
 # Creates a board object which is an array from 1 to 9
 # output.legth == 9
 class GameBoard
