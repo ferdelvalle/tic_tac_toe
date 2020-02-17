@@ -3,11 +3,13 @@ AllCops:
     - "README.md"
     - "Guardfile"
     - "Rakefile"
+    - "./lib/logic.rb"
+    - "./bin/main.rb"
 
   DisplayCopNames: true
 
 Layout/LineLength:
-  Max: 120
+  Max: 270
 Metrics/MethodLength:
   Max: 20
 Metrics/AbcSize:
@@ -37,6 +39,6 @@ Layout/HashAlignment:
 Layout/ExtraSpacing:
   AllowForAlignment: false
 Layout/MultilineMethodCallIndentation:
-  Enabled: true
+  Enabled: false
   EnforcedStyle: indented
   

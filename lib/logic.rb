@@ -34,7 +34,7 @@ class Interface
     @parameter = param
     @centerdiv = ' ¦ '.yellow
     @leftdiv = '¦ '.yellow
-    @rowdiv = "\n -----------".yellow    
+    @rowdiv = "\n -----------".yellow
     "\n  #{@parameter[0]}#{@centerdiv}#{@parameter[1]} #{@leftdiv}#{@parameter[2]}  #{@rowdiv}\n  #{@parameter[3]}#{@centerdiv}#{@parameter[4]} #{@leftdiv}#{@parameter[5]}  #{@rowdiv}\n  #{@parameter[6]}#{@centerdiv}#{@parameter[7]} #{@leftdiv}#{@parameter[8]}  \n "
   end
 
@@ -65,6 +65,7 @@ class Interface
   end
 
   private
+
   # Finishes the game after turn 9
   # returns either false if @count < 9 or true if @count = 9
   def self.game_ending

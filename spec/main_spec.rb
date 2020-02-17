@@ -15,65 +15,6 @@ RSpec.describe Interface do
   end
 end
 
-=begin
-  # Tenny
-
-  describe '#game_ending' do
-    it 'returns true if @count != 9' do
-      expect().to eql()
-    end
-
-    it 'returns nil if @count == 9' do
-      expect().to eql()
-    end
-  end
-
-  describe '#finisher' do
-    it 'sets @count to 9' do
-      expect().to eql()
-    end
-  end
-
-  describe '#increaser' do
-    it 'increases @count by one' do
-      expect().to eql()
-    end
-  end
-
-  describe '#turn_odd' do
-    it 'returns true if @count is an odd number' do
-      expect().to eql()
-    end
-
-    it 'returns nil if @count is an even number' do
-      expect().to eql()
-    end
-  end
-
-  describe '#victory_check' do
-    it 'prints player 1 won if @winner == 1 && @count < 9' do
-      expect().to eql()
-    end
-
-    it 'invokes Interface.finisher if @winner == 1 && @count < 9' do
-      expect().to eql()
-    end
-
-    it 'prints "player 2 won" if @winner == 2 && @count < 9' do
-      expect().to eql()
-    end
-
-    it 'invokes Interface.finisher if @winner == 2 && @count < 9' do
-      expect().to eql()
-    end
-
-    it 'prints DRAW if @count == 9' do
-      expect().to eql()
-    end
-  end
-end
-=end
-
 # Logic
 
 # Class String
