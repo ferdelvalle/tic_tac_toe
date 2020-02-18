@@ -1,21 +1,91 @@
 require_relative '../lib/logic'
-# Main
 
 # Class Interface
-
-# Fer
-
 RSpec.describe Interface do
-  describe 'display' do
+  describe '#display' do
     it 'displays the board' do
       game = [1, 2, 3, 4, 5, 6, 7, 8, 9]
       outie = Interface.display(game)
       expect(outie).to be_a(String)
     end
   end
-end
 
-# Logic
+  describe '#game_ending' do
+    it 'returns true if the parameter != 9' do
+      boolie = Interface.game_ending(8)
+      expect(boolie).to eql(true)
+    end
+
+    it 'returns true if the parameter != 9' do
+      boolie = Interface.game_ending(9)
+      expect(boolie).to eql(false)
+    end
+  end
+
+  describe '#count_giver' do
+    it 'returns @count which is an integer' do
+      testing = Interface.count_giver
+      expect(testing).to be_a(Integer)
+    end
+
+    it 'returns @count as a starting point of 0' do
+      testing = Interface.count_giver
+      expect(testing).to eql(0)
+    end
+
+    it 'returns @count which is not a String' do
+      testing = Interface.count_giver
+      expect(testing).not_to be_a(String)
+    end
+
+    it 'returns @count which is not a Float' do
+      testing = Interface.count_giver
+      expect(testing).not_to be_a(Float)
+    end
+  end
+
+  describe '#increaser' do
+    it 'increases @count by one' do
+      Interface.increaser
+      count1 = Interface.count_giver
+      expect(count1).to eql(1)
+    end
+
+    it 'increases @count by one' do
+      Interface.increaser
+      Interface.increaser
+      count1 = Interface.count_giver
+      expect(count1).to eql(3)
+    end
+  end
+
+  describe '#finisher' do
+    it 'makes @count to be an integer' do
+      Interface.finisher
+      count1 = Interface.count_giver
+      expect(count1).to be_a(Integer)
+    end
+
+    it 'makes @count to be 9' do
+      Interface.finisher
+      count1 = Interface.count_giver
+      expect(count1).to eql(9)
+    end
+  end
+
+  describe '#turn_odd' do
+    it 'returns true if @count has an odd value' do
+      boolie = Interface.turn_odd
+      expect(boolie).to eql(true)
+    end
+
+    it 'returns false if @count has an even value' do
+      Interface.increaser
+      boolie = Interface.turn_odd
+      expect(boolie).to eql(false)
+    end
+  end
+end
 
 # Class String
 RSpec.describe String do
@@ -162,7 +232,6 @@ RSpec.describe MovesInput do
 end
 
 # Class WinChecks
-
 RSpec.describe WinChecks do
   let(:markx) { 'X'.blue }
   let(:marko) { 'O'.pink }

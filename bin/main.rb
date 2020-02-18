@@ -8,7 +8,7 @@ puts "\n What is the name of the second player?".pink
 player2 = Players.new(gets.chomp.pink, 'O'.pink)
 print Interface.display(game.board)
 
-while Interface.game_ending
+while Interface.game_ending(Interface.count_giver)
   Interface.increaser
   if Interface.turn_odd
     # Player 1 move
