@@ -3,11 +3,12 @@ AllCops:
     - "README.md"
     - "Guardfile"
     - "Rakefile"
+    - "./spec/spec_helper.rb"
 
   DisplayCopNames: true
 
 Layout/LineLength:
-  Max: 120
+  Max: 270
 Metrics/MethodLength:
   Max: 20
 Metrics/AbcSize:
@@ -37,6 +38,6 @@ Layout/HashAlignment:
 Layout/ExtraSpacing:
   AllowForAlignment: false
 Layout/MultilineMethodCallIndentation:
-  Enabled: true
+  Enabled: false
   EnforcedStyle: indented
   

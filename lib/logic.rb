@@ -25,7 +25,67 @@ class String
   end
 end
 
-# Logic
+# Responsible for collecting information and displaying it
+class Interface
+  attr_accessor :count
+  @count = 0
+
+  # returns the board
+  def self.display(param)
+    @parameter = param
+    @centerdiv = ' ¦ '.yellow
+    @leftdiv = '¦ '.yellow
+    @rowdiv = "\n -----------".yellow
+    "\n  #{@parameter[0]}#{@centerdiv}#{@parameter[1]} #{@leftdiv}#{@parameter[2]}  #{@rowdiv}\n  #{@parameter[3]}#{@centerdiv}#{@parameter[4]} #{@leftdiv}#{@parameter[5]}  #{@rowdiv}\n  #{@parameter[6]}#{@centerdiv}#{@parameter[7]} #{@leftdiv}#{@parameter[8]}  \n "
+  end
+
+  # Checks if there is a winner, if there is, it finishes the game and announces the winner.
+  def self.victory_check(winner, player1, player2)
+    @winner = winner
+    @player1 = player1
+    @player2 = player2
+    @turn = @count
+    if @winner == 1 && @turn < 9
+      Interface.finisher
+      "\n#{player1} Wins!"
+    elsif @winner == 2 && @turn < 9
+      Interface.finisher
+      "\n#{player2} Wins!"
+    elsif @turn == 9
+      "\n DRAW".green
+    end
+  end
+
+  # Finishes the game after turn 9
+  def self.count_giver
+    @count
+  end
+
+  def self.game_ending(param)
+    @param = param
+    return true if @param != 9
+    return false if @param == 9
+  end
+
+  # Finishes the game after victory
+  def self.finisher
+    @count = 9
+  end
+
+  # Increaser
+  def self.increaser
+    @count += 1
+  end
+
+  # Assignes turns
+  def self.turn_odd
+    if @count.odd?
+      true
+    else
+      false
+    end
+  end
+end
 
 # Creates a board object which is an array from 1 to 9
 class GameBoard
@@ -37,8 +97,8 @@ end
 
 # Creates an object for each new player with name and mark (X or O)
 class Players
-  attr_reader :name
-  attr_reader :mark
+  attr_reader :name, :mark
+
   def initialize(name, mark)
     @name = name
     @mark = mark
@@ -66,6 +126,16 @@ class MovesInput
     @index = input.to_i
     @index -= 1
     return false if board[@index].is_a? String
+  end
+
+  def self.universal_check(board, move)
+    @move = move
+    @board = board
+    if MovesInput.valid_check(@move) == false || MovesInput.repeat_check(@board, @move) == false
+      false
+    else
+      true
+    end
   end
 end
 
