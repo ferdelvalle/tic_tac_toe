@@ -3,8 +3,8 @@ AllCops:
     - "README.md"
     - "Guardfile"
     - "Rakefile"
-    - "./lib/logic.rb"
-    - "./bin/main.rb"
+#    - "./lib/logic.rb"
+#    - "./bin/main.rb"
 
   DisplayCopNames: true
 

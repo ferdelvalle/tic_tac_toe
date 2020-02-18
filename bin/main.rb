@@ -1,23 +1,5 @@
 #!/usr/bin/env ruby
 require_relative '../lib/logic'
-
-class Interface
-
-  private
-  
-  def self.collect_move(move, board)
-    @move = move
-    @board = board
-    while MovesInput.valid_check(@move) == false || MovesInput.repeat_check(@board, @move) == false
-      puts 'Invalid input or space already taken'.red
-      @move = gets.chomp!
-    end
-    @move.to_i
-  end
-end
-
-# Game
-
 puts 'Wellcome to Tic Tac Toe by Tenny and Fer'.green
 game = GameBoard.new
 puts "\n What is the name of the first player?".blue
@@ -31,11 +13,23 @@ while Interface.game_ending
   if Interface.turn_odd
     # Player 1 move
     puts "\n What is #{player1.name}'s move?"
-    MovesInput.making_move(game.board, Interface.collect_move(gets.chomp, game.board), player1.mark)
+    mover = gets.chomp!
+    while MovesInput.universal_check(game.board, mover) == false
+      puts 'Invalid input or space already taken'.red
+      mover = gets.chomp!
+    end
+    mover = mover.to_i
+    MovesInput.making_move(game.board, mover, player1.mark)
   else
     # player 2 move
     puts "\n What is #{player2.name}'s move?"
-    MovesInput.making_move(game.board, Interface.collect_move(gets.chomp, game.board), player2.mark)
+    mover = gets.chomp!
+    while MovesInput.universal_check(game.board, mover) == false
+      puts 'Invalid input or space already taken'.red
+      mover = gets.chomp!
+    end
+    mover = mover.to_i
+    MovesInput.making_move(game.board, mover, player2.mark)
   end
   print Interface.display(game.board)
   print Interface.victory_check(WinChecks.global(game.board), player1.name, player2.name)

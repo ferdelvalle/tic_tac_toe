@@ -64,8 +64,6 @@ class Interface
     end
   end
 
-  private
-
   # Finishes the game after turn 9
   # returns either false if @count < 9 or true if @count = 9
   def self.game_ending
@@ -131,6 +129,16 @@ class MovesInput
     @index = input.to_i
     @index -= 1
     return false if board[@index].is_a? String
+  end
+
+  def self.universal_check(board, move)
+    @move = move
+    @board = board
+    if MovesInput.valid_check(@move) == false || MovesInput.repeat_check(@board, @move) == false
+      false
+    else
+      true
+    end
   end
 end
 

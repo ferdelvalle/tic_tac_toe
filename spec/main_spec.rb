@@ -107,7 +107,7 @@ RSpec.describe MovesInput do
       expect(boolie).to eql(nil)
     end
 
-    it 'returns false if the move input is an integer' do
+    it 'returns false if the move input is an character' do
       boolie = MovesInput.valid_check(invalid1)
       expect(boolie).to eql(false)
     end
@@ -130,6 +130,33 @@ RSpec.describe MovesInput do
     it 'returns nil if a position in the board is an integer (untaken)' do
       boolie = MovesInput.repeat_check(game, validi)
       expect(boolie).to eql(nil)
+    end
+  end
+
+  describe '#universal_check' do
+    let(:game) { [1, 2, 3, 4, 5, 6, 'X', 8, 9] }
+    let(:validi) { '4' }
+    let(:invalidi1) { '7' }
+    let(:invalidi2) { 'G' }
+    let(:invalidi3) { '77' }
+    it 'returns false if a position in the board is a string (already taken)' do
+      boolie = MovesInput.universal_check(game, invalidi1)
+      expect(boolie).to eql(false)
+    end
+
+    it 'returns false if the move input is an character' do
+      boolie = MovesInput.universal_check(game, invalidi2)
+      expect(boolie).to eql(false)
+    end
+
+    it 'returns false the move input is an integer of more than one digit' do
+      boolie = MovesInput.universal_check(game, invalidi3)
+      expect(boolie).to eql(false)
+    end
+
+    it 'returns true if a position in the board is an integer (untaken)' do
+      boolie = MovesInput.universal_check(game, validi)
+      expect(boolie).to eql(true)
     end
   end
 end
