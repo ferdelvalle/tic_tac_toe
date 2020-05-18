@@ -47,10 +47,10 @@ class Interface
     @turn = @count
     if @winner == 1 && @turn < 9
       Interface.finisher
-      "\n#{player1} Wins!"
+      "\n#{player1} Wins! \n"
     elsif @winner == 2 && @turn < 9
       Interface.finisher
-      "\n#{player2} Wins!"
+      "\n#{player2} Wins! \n"
     elsif @turn == 9
       "\n DRAW".green
     end
