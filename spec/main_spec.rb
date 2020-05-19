@@ -387,152 +387,148 @@ RSpec.describe WinChecks do
     end
   end
 
-  describe '#vertical' do
+  describe '#check' do
     it 'returns 0 if positions 1, 4 and 7 are not equaly marked' do
       game = [1, 2, 3, markx, 5, 6, 7, 8, 9]
-      winner = WinChecks.vertical(game)
+      winner = WinChecks.check(game,0, 3, 6)
       expect(winner).to eql(0)
     end
 
     it 'returns 0 if positions 2, 5 and 8 are not equaly marked' do
       game = [1, 2, 3, 4, 5, 6, 7, markx, 9]
-      winner = WinChecks.vertical(game)
+      winner = WinChecks.check(game, 1, 4, 7)
       expect(winner).to eql(0)
     end
 
     it 'returns 0 if positions 3, 6 and 9 are not equaly marked' do
       game = [1, 2, markx, 4, 5, 6, 7, 8, 9]
-      winner = WinChecks.vertical(game)
+      winner = WinChecks.check(game, 2, 6, 8)
       expect(winner).to eql(0)
     end
 
     it 'returns 1 if positions 1, 4 and 7 are marked with a blue X' do
       game = [markx, 2, 3, markx, 5, 6, markx, 8, 9]
-      winner = WinChecks.vertical(game)
+      winner = WinChecks.check(game, 0, 3, 6)
       expect(winner).to eql(1)
     end
 
     it 'returns 1 if positions 2, 5 and 8 are marked with a blue X' do
       game = [1, markx, 3, 4, markx, 6, 7, markx, 9]
-      winner = WinChecks.vertical(game)
+      winner = WinChecks.check(game, 1, 4, 7)
       expect(winner).to eql(1)
     end
 
     it 'returns 1 if positions 3, 6 and 9 are marked with a blue X' do
       game = [1, 2, markx, 4, 5, markx, 7, 8, markx]
-      winner = WinChecks.vertical(game)
+      winner = WinChecks.check(game, 2, 5, 8)
       expect(winner).to eql(1)
     end
 
     it 'returns 2 if positions 1, 4 and 7 are marked with a pink O' do
       game = [marko, 2, 3, marko, 5, 6, marko, 8, 9]
-      winner = WinChecks.vertical(game)
+      winner = WinChecks.check(game, 0, 3, 6)
       expect(winner).to eql(2)
     end
 
     it 'returns 2 if positions 2, 5 and 8 are marked with a pink O' do
       game = [1, marko, 3, 4, marko, 6, 7, marko, 9]
-      winner = WinChecks.vertical(game)
+      winner = WinChecks.check(game, 1, 4, 7)
       expect(winner).to eql(2)
     end
 
     it 'returns 2 if positions 3, 6 and 9 are marked with a pink O' do
       game = [1, 2, marko, 4, 5, marko, 7, 8, marko]
-      winner = WinChecks.vertical(game)
+      winner = WinChecks.check(game, 2, 5, 8)
       expect(winner).to eql(2)
     end
-  end
 
-  describe '#horizontal' do
     it 'returns 0 if positions 1, 2 and 3 are not equaly marked' do
       game = [marko, 2, markx, marko, 5, 6, 7, 8, 9]
-      winner = WinChecks.horizontal(game)
+      winner = WinChecks.check(game, 0, 1, 2)
       expect(winner).to eql(0)
     end
 
     it 'returns 0 if positions 4, 5 and 6 are not equaly marked' do
       game = [1, 2, 3, marko, markx, 6, 7, 8, 9]
-      winner = WinChecks.horizontal(game)
+      winner = WinChecks.check(game, 3, 4, 5)
       expect(winner).to eql(0)
     end
 
     it 'returns 0 if positions 7, 8 and 9 are not equaly marked' do
       game = [1, 2, 3, 4, 5, 6, 7, marko, markx]
-      winner = WinChecks.horizontal(game)
+      winner = WinChecks.check(game, 6, 7, 8)
       expect(winner).to eql(0)
     end
 
     it 'returns 1 if positions 1, 2 and 3 are marked with a blue X' do
       game = [markx, markx, markx, 4, 5, 6, 7, 8, 9]
-      winner = WinChecks.horizontal(game)
+      winner = WinChecks.check(game, 0, 1, 2)
       expect(winner).to eql(1)
     end
 
     it 'returns 1 if positions 4, 5 and 6 are marked with a blue X' do
       game = [1, 2, 3, markx, markx, markx, 7, 8, 9]
-      winner = WinChecks.horizontal(game)
+      winner = WinChecks.check(game, 3, 4, 5)
       expect(winner).to eql(1)
     end
 
     it 'returns 1 if positions 7, 8 and 9 are marked with a blue X' do
       game = [1, 2, 3, 4, 5, 6, markx, markx, markx]
-      winner = WinChecks.horizontal(game)
+      winner = WinChecks.check(game, 6, 7, 8)
       expect(winner).to eql(1)
     end
 
     it 'returns 2 if positions 1, 2 and 3 are marked with a pink O' do
       game = [marko, marko, marko, 4, 5, 6, 7, 8, 9]
-      winner = WinChecks.horizontal(game)
+      winner = WinChecks.check(game, 0, 1, 2)
       expect(winner).to eql(2)
     end
 
     it 'returns 2 if positions 4, 5 and 6 are marked with a pink O' do
       game = [1, 2, 3, marko, marko, marko, 7, 8, 9]
-      winner = WinChecks.horizontal(game)
+      winner = WinChecks.check(game, 3, 4, 5)
       expect(winner).to eql(2)
     end
 
     it 'returns 2 if positions 7, 8 and 9 are marked with a pink O' do
       game = [1, 2, 3, 4, 5, 6, marko, marko, marko]
-      winner = WinChecks.horizontal(game)
+      winner = WinChecks.check(game, 6, 7, 8)
       expect(winner).to eql(2)
     end
-  end
 
-  describe '#diagonal' do
     it 'returns 0 if positions 1, 5 and 9 are not equaly marked' do
       game = [markx, 2, 3, 4, marko, 6, 7, 8, 9]
-      winner = WinChecks.diagonal(game)
+      winner = WinChecks.check(game, 0, 4, 8,)
       expect(winner).to eql(0)
     end
 
     it 'returns 0 if positions 7, 5 and 3 are not equaly marked' do
       game = [1, 2, 3, 4, 5, 6, marko, markx, 9]
-      winner = WinChecks.diagonal(game)
+      winner = WinChecks.check(game, 6, 4, 2)
       expect(winner).to eql(0)
     end
 
     it 'returns 1 if positions 1, 5 and 9 are marked with a blue X' do
       game = [markx, 2, 3, 4, markx, 6, 7, 8, markx]
-      winner = WinChecks.diagonal(game)
+      winner = WinChecks.check(game, 0, 4, 8)
       expect(winner).to eql(1)
     end
 
     it 'returns 1 if positions 7, 5 and 3 are marked with a blue X' do
       game = [1, 2, markx, 4, markx, 6, markx, 8, 9]
-      winner = WinChecks.diagonal(game)
+      winner = WinChecks.check(game, 6, 4, 2)
       expect(winner).to eql(1)
     end
 
     it 'returns 2 if positions 1, 5 and 9 are marked with a pink O' do
       game = [marko, 2, 3, 4, marko, 6, 7, 8, marko]
-      winner = WinChecks.diagonal(game)
+      winner = WinChecks.check(game, 0, 4, 8)
       expect(winner).to eql(2)
     end
 
     it 'returns 2 if positions 3, 5 and 7 are marked with a pink O' do
       game = [1, 2, marko, 4, marko, 6, marko, 8, 9]
-      winner = WinChecks.diagonal(game)
+      winner = WinChecks.check(game, 2, 4, 6)
       expect(winner).to eql(2)
     end
   end

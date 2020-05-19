@@ -141,80 +141,28 @@ end
 
 # Checks for winning conditions and provides an output accordingly
 class WinChecks
+  def self.check (board, index1, index2, index3)
+    @board = board
+    @index1 = index1
+    @index2 = index2
+    @index3 = index3
+    @linecheck = [@board[@index1], @board[index2], @board[@index3]]
+    if @linecheck.all?{ |x| x == 'X'.blue }
+      return 1 
+    elsif @linecheck.all?{ |o| o == 'O'.pink }
+      return 2
+    else
+      return 0
+    end
+  end
+
   def self.global(board)
     @board = board
-    @revision = []
-    @revision << WinChecks.vertical(@board)
-    @revision << WinChecks.horizontal(@board)
-    @revision << WinChecks.diagonal(@board)
-    if @revision.any? { |i| i == 1 }
-      1
-    elsif @revision.any? { |i| i == 2 }
-      2
-    else
-      0
-    end
-  end
-
-  def self.vertical(board)
-    @board = board
-    @winner = 0
-    @column = []
-    @vind1 = 0
-    @vind2 = 3
-    @vind3 = 6
-    while @vind1 != 3
-      @column << @board[@vind1]
-      @column << @board[@vind2]
-      @column << @board[@vind3]
-      @winner = 1 if @column.all? { |x| x == 'X'.blue }
-      @winner = 2 if @column.all? { |o| o == 'O'.pink }
-      @column = []
-      @vind1 += 1
-      @vind2 += 1
-      @vind3 += 1
-    end
-    @winner
-  end
-
-  def self.horizontal(board)
-    @board = board
-    @winner = 0
-    @row = []
-    @hind1 = 0
-    @hind2 = 1
-    @hind3 = 2
-    while @hind1 < 7
-      @row << @board[@hind1]
-      @row << @board[@hind2]
-      @row << @board[@hind3]
-      @winner = 1 if @row.all? { |x| x == 'X'.blue }
-      @winner = 2 if @row.all? { |o| o == 'O'.pink }
-      @row = []
-      @hind1 += 3
-      @hind2 += 3
-      @hind3 += 3
-    end
-    @winner
-  end
-
-  def self.diagonal(board)
-    @board = board
-    @winner = 0
-    @diagonal = []
-    @dind1 = 0
-    @dind2 = 4
-    @dind3 = 8
-    while @dind1 < 7
-      @diagonal << @board[@dind1]
-      @diagonal << @board[@dind2]
-      @diagonal << @board[@dind3]
-      @winner = 1 if @diagonal.all? { |x| x == 'X'.blue }
-      @winner = 2 if @diagonal.all? { |o| o == 'O'.pink }
-      @diagonal = []
-      @dind1 += 6
-      @dind3 -= 6
-    end
-    @winner
+    @lines = [[0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 4, 8], [2, 4, 6]]
+    @check_array = []
+    @lines.each {|set| @check_array << WinChecks.check(@board, set[0], set[1], set[2])}
+    return 1 if @check_array.any?{|x| x == 1}
+    return 2 if @check_array.any?{|o| o == 2}
+    return 0 if @check_array.all?{|i| i == 0}
   end
 end
