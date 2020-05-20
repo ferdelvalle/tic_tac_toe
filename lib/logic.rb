@@ -52,7 +52,7 @@ class Interface
       Interface.finisher
       "\n#{player2} Wins! \n"
     elsif @turn == 9
-      "\n DRAW".green
+      "\n DRAW \n".green
     end
   end
 
@@ -141,18 +141,18 @@ end
 
 # Checks for winning conditions and provides an output accordingly
 class WinChecks
-  def self.check (board, index1, index2, index3)
+  def self.check(board, index1, index2, index3)
     @board = board
     @index1 = index1
     @index2 = index2
     @index3 = index3
     @linecheck = [@board[@index1], @board[index2], @board[@index3]]
-    if @linecheck.all?{ |x| x == 'X'.blue }
-      return 1 
-    elsif @linecheck.all?{ |o| o == 'O'.pink }
-      return 2
+    if @linecheck.all? { |x| x == 'X'.blue }
+      1
+    elsif @linecheck.all? { |o| o == 'O'.pink }
+      2
     else
-      return 0
+      0
     end
   end
 
@@ -160,9 +160,9 @@ class WinChecks
     @board = board
     @lines = [[0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 4, 8], [2, 4, 6]]
     @check_array = []
-    @lines.each {|set| @check_array << WinChecks.check(@board, set[0], set[1], set[2])}
-    return 1 if @check_array.any?{|x| x == 1}
-    return 2 if @check_array.any?{|o| o == 2}
-    return 0 if @check_array.all?{|i| i == 0}
+    @lines.each { |set| @check_array << WinChecks.check(@board, set[0], set[1], set[2]) }
+    return 1 if @check_array.any? { |x| x == 1 }
+    return 2 if @check_array.any? { |o| o == 2 }
+    return 0 if @check_array.all? { :zero? }
   end
 end

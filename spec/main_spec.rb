@@ -390,7 +390,7 @@ RSpec.describe WinChecks do
   describe '#check' do
     it 'returns 0 if positions 1, 4 and 7 are not equaly marked' do
       game = [1, 2, 3, markx, 5, 6, 7, 8, 9]
-      winner = WinChecks.check(game,0, 3, 6)
+      winner = WinChecks.check(game, 0, 3, 6)
       expect(winner).to eql(0)
     end
 
@@ -498,7 +498,7 @@ RSpec.describe WinChecks do
 
     it 'returns 0 if positions 1, 5 and 9 are not equaly marked' do
       game = [markx, 2, 3, 4, marko, 6, 7, 8, 9]
-      winner = WinChecks.check(game, 0, 4, 8,)
+      winner = WinChecks.check(game, 0, 4, 8)
       expect(winner).to eql(0)
     end
 
